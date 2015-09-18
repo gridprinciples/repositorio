@@ -33,7 +33,7 @@ class Repository
     protected static function boot()
     {
         if (!static::$model) {
-            throw new ModelNotSetException('Model not set.  Please set `protected static $model = \App\YourModel::class;` in ' . get_class($this) . '.');
+            throw new ModelNotSetException('Model not set.  Please set `protected static $model = \App\YourModel::class;` in ' . static::class . '.');
         }
     }
 
@@ -87,12 +87,12 @@ class Repository
     /**
      * Creates or updates one or many models.
      *
-     * @param mixed $response
+     * @param mixed $data
      * @param mixed|false $target
      * @throws InvalidResponseDataException
      * @return Collection
      */
-    public function save($response, $target = false)
+    public static function save($data, $target = false)
     {
         // Are we only saving a single model?  The return should reflect this later.
         $savingOnlyOne = !$target || class_basename($target) === class_basename(static::getNewModel());
@@ -102,20 +102,20 @@ class Repository
             $target = static::getNewModel();
         }
 
-        $targets = $this->consolidateToCollection($target);
+        $targets = static::consolidateToCollection($target);
 
-        if (is_object($response)) {
-            if (!method_exists($response, 'toArray')) {
+        if (is_object($data)) {
+            if (!method_exists($data, 'toArray')) {
                 throw new InvalidResponseDataException;
             }
 
             // Simplify the response object to an array of values to save.
-            $response = $response->toArray();
+            $data = $data->toArray();
         }
 
         foreach ($targets as $k => $model) {
             // Save this model with these fields.
-            $targets[$k] = $this->saveOne($model, $response);
+            $targets[$k] = static::saveOne($model, $data);
         }
 
         return $savingOnlyOne ? $targets->first() : $targets;
@@ -163,7 +163,7 @@ class Repository
      * @param $fields
      * @return boolean
      */
-    protected function saveOne($model, $fields)
+    protected static function saveOne($model, $fields)
     {
         // Set model data from the response data.
         $model->fill($fields);
@@ -182,7 +182,7 @@ class Repository
      * @return Collection
      * @throws InvalidModelException
      */
-    protected function consolidateToCollection($target)
+    protected static function consolidateToCollection($target)
     {
         if (class_basename($target) == 'Collection') {
             // This is already a Collection, just pass it back.

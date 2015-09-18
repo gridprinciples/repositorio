@@ -35,8 +35,10 @@ abstract class DatabaseTestCase extends TestCase
 
         $packageMigrations = $fileSystem->files(__DIR__ . "/../../src/Migrations");
         $laravelMigrations = $fileSystem->files(__DIR__ . "/../../vendor/laravel/laravel/database/migrations");
+        $testingMigrations = $fileSystem->files(__DIR__ . "/../migrations");
 
         $migrationFiles = array_merge($laravelMigrations, $packageMigrations);
+        $migrationFiles = array_merge($migrationFiles, $testingMigrations);
 
         foreach ($migrationFiles as $file) {
             $fileSystem->requireOnce($file);
