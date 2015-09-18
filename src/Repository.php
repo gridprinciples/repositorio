@@ -42,7 +42,7 @@ class Repository
      *
      * @param $targets
      */
-    public function get($targets)
+    public static function get($targets)
     {
         $singleModelMode = false;
 
@@ -55,10 +55,10 @@ class Repository
         }
 
         // Start crafting a new query.
-        $query = $this->getNewQuery();
+        $query = static::newQuery();
 
         // Limit to these keys
-        $query->whereIn(static::getNewModel()->getKeyName(), $targets);
+        $query->whereIn(static::newModel()->getKeyName(), $targets);
 
         // Run the query and return the results.
         return $singleModelMode ? $query->first() : $query->get();
@@ -73,7 +73,7 @@ class Repository
     public function index($limit = 15)
     {
         // Start crafting a new query.
-        $query = $this->getNewQuery();
+        $query = $this->newQuery();
 
         if ($this->modelHasTrait('Sortable')) {
             // Model can be sorted, so sort it.  Sort information is pulled from the $_GET array.
@@ -94,12 +94,18 @@ class Repository
      */
     public static function save($data, $target = false)
     {
+        if(is_array($target))
+        {
+            // If the $target is a basic array, put it into a Collection.
+            $target = collect($target);
+        }
+
         // Are we only saving a single model?  The return should reflect this later.
-        $savingOnlyOne = !$target || class_basename($target) === class_basename(static::getNewModel());
+        $savingOnlyOne = !$target || class_basename($target) === class_basename(static::newModel());
 
         if (!$target) {
             // No target was passed; new up an instance of the default model.
-            $target = static::getNewModel();
+            $target = static::newModel();
         }
 
         $targets = static::consolidateToCollection($target);
@@ -127,11 +133,11 @@ class Repository
      * @param mixed $target
      * @return boolean
      */
-    public function delete($target)
+    public static function delete($target)
     {
-        $targets = $this->consolidateToCollection($target);
+        $targets = static::consolidateToCollection($target);
 
-        return (bool) static::getNewModel()->destroy($targets->modelKeys());
+        return (bool) static::newModel()->destroy($targets->modelKeys());
     }
 
     /**
@@ -139,7 +145,7 @@ class Repository
      *
      * @return mixed
      */
-    public static function getNewModel()
+    public static function newModel()
     {
         return with(new static::$model)->newInstance();
     }
@@ -149,9 +155,9 @@ class Repository
      *
      * @return mixed
      */
-    public static function getNewQuery()
+    public static function newQuery()
     {
-        $model = static::getNewModel();
+        $model = static::newModel();
 
         return $model->newQuery();
     }
@@ -189,7 +195,7 @@ class Repository
             return $target;
         }
 
-        if (class_basename($target) !== class_basename(static::getNewModel())) {
+        if (class_basename($target) !== class_basename(static::newModel())) {
             // This wasn't already a Collection, but neither is it the expected class.
             throw new InvalidModelException;
         }
@@ -208,7 +214,7 @@ class Repository
      */
     protected static function modelHasTrait($string)
     {
-        $traitClassNames = array_map('class_basename', class_uses(static::getNewModel()));
+        $traitClassNames = array_map('class_basename', class_uses(static::newModel()));
 
         return in_array($string, $traitClassNames);
     }

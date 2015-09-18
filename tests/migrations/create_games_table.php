@@ -15,6 +15,7 @@ class CreateGamesTable extends Migration
         Schema::create('games', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('country', 2)->nullable();
             $table->timestamps();
         });
     }
