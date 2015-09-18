@@ -94,8 +94,7 @@ class Repository
      */
     public static function save($data, $target = false)
     {
-        if(is_array($target))
-        {
+        if (is_array($target)) {
             // If the $target is a basic array, put it into a Collection.
             $target = collect($target);
         }
@@ -217,5 +216,17 @@ class Repository
         $traitClassNames = array_map('class_basename', class_uses(static::newModel()));
 
         return in_array($string, $traitClassNames);
+    }
+
+    public static function __callStatic($method, $parameters)
+    {
+        return forward_static_call_array([static::newModel(), $method], $parameters);
+    }
+
+    public function __call($method, $parameters)
+    {
+        $query = $this->newQuery();
+
+        return call_user_func_array([$query, $method], $parameters);
     }
 }

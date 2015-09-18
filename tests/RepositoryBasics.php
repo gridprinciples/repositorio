@@ -42,10 +42,7 @@ class RepositoryBasics extends DatabaseTestCase
             'country' => 'jp',
         ], $games);
 
-        $allGames = GameRepository::all();
-        $gamesByCountry = $allGames->groupBy('country');
-
-        $this->assertCount(3, array_get($gamesByCountry, 'jp'));
+        $this->assertCount(3, array_get(GameRepository::allByCountry(), 'jp'));
     }
 
     public function test_it_can_delete_records()
