@@ -198,11 +198,25 @@ class Repository
         return in_array($string, $traitClassNames);
     }
 
+    /**
+     * Unknown static calls get handed an instance of the underlying model.
+     *
+     * @param $method
+     * @param $parameters
+     * @return mixed
+     */
     public static function __callStatic($method, $parameters)
     {
         return forward_static_call_array([static::newModel(), $method], $parameters);
     }
 
+    /**
+     * Unknown regular calls get handed a new query.
+     *
+     * @param $method
+     * @param $parameters
+     * @return mixed
+     */
     public function __call($method, $parameters)
     {
         $query = $this->newQuery();
