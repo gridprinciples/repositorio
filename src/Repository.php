@@ -8,7 +8,7 @@ use GridPrinciples\Repositorio\Exceptions\InvalidModelException;
 use GridPrinciples\Repositorio\Exceptions\InvalidResponseDataException;
 use GridPrinciples\Repositorio\Exceptions\ModelNotSetException;
 
-class Repository
+abstract class Repository
 {
     /**
      * The fully-qualified name of the model.
