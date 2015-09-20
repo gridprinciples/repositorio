@@ -18,26 +18,6 @@ class Repository
     protected static $model;
 
     /**
-     * Construct this repository.
-     */
-    public function __construct()
-    {
-        static::boot();
-    }
-
-    /**
-     * "Boot up" this repository.
-     *
-     * @throws ModelNotSetException
-     */
-    protected static function boot()
-    {
-        if (!static::$model) {
-            throw new ModelNotSetException('Model not set.  Please set `protected static $model = \App\YourModel::class;` in ' . static::class . '.');
-        }
-    }
-
-    /**
      * Retrieve a target (or targets) by ID.
      *
      * @param $targets

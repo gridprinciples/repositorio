@@ -42,7 +42,14 @@ class RepositoryBasics extends DatabaseTestCase
             'country' => 'jp',
         ], $games);
 
-        $this->assertCount(3, array_get(GameRepository::allByCountry(), 'jp'));
+        GameRepository::save(['name' => 'Tony Hawk\'s Pro Skater 3', 'country' => 'us']);
+        GameRepository::save(['name' => 'Tony Hawk\'s Pro Skater 4', 'country' => 'us']);
+
+        $gamesByCountry = GameRepository::allByCountry();
+
+        $this->assertCount(3, array_get($gamesByCountry, 'jp'));
+        $this->assertCount(2, array_get($gamesByCountry, 'us'));
+        $this->assertCount(1, array_get($gamesByCountry, ''));
     }
 
     public function test_it_can_delete_records()
