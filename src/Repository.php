@@ -6,7 +6,6 @@ use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use GridPrinciples\Repositorio\Exceptions\InvalidModelException;
 use GridPrinciples\Repositorio\Exceptions\InvalidResponseDataException;
-use GridPrinciples\Repositorio\Exceptions\ModelNotSetException;
 
 abstract class Repository
 {

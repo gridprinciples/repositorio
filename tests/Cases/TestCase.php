@@ -18,9 +18,6 @@ abstract class TestCase extends BaseTestCase
 
         $app->make('Illuminate\Contracts\Console\Kernel')->bootstrap();
 
-        // Register our package's service provider
-        $app->register(RepositoryServiceProvider::class);
-
         return $app;
     }
 }
