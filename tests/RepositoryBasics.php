@@ -28,6 +28,18 @@ class RepositoryBasics extends DatabaseTestCase
         $this->assertEquals('Super Mario Maker', $mario->name);
     }
 
+    public function test_it_can_select_an_index()
+    {
+        GameRepository::save(['name' => 'Mega Man X']);
+        GameRepository::save(['name' => 'Mega Man X2']);
+        GameRepository::save(['name' => 'Mega Man X3']);
+
+        $index = GameRepository::index();
+
+        $this->assertCount(3, $index->all());
+        $this->assertEquals('LengthAwarePaginator', class_basename($index));
+    }
+
     public function test_it_can_update_multiple_records()
     {
         GameRepository::save(['name' => 'Mass Effect']);

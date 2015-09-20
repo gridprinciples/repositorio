@@ -50,12 +50,12 @@ class Repository
      * @param int $limit
      * @return
      */
-    public function index($limit = 15)
+    public static function index($limit = 15)
     {
         // Start crafting a new query.
-        $query = $this->newQuery();
+        $query = self::newQuery();
 
-        if ($this->modelHasTrait('Sortable')) {
+        if (self::modelHasTrait('Sortable')) {
             // Model can be sorted, so sort it.  Sort information is pulled from the $_GET array.
             $query->sorted();
         }
