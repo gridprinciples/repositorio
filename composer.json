@@ -1,8 +1,8 @@
 {
-    "name": "gridprinciples/repositorio",
+    "name": "gridprinciples/repository",
     "autoload": {
         "psr-4": {
-            "GridPrinciples\\Repositorio\\": "src/"
+            "GridPrinciples\\": "src/"
         }
     },
     "require-dev": {
@@ -11,7 +11,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "GridPrinciples\\Repositorio\\Tests\\": "tests/"
+            "GridPrinciples\\Tests\\": "tests/"
         }
     }
 }

@@ -1,9 +1,9 @@
 <?php
 
-namespace GridPrinciples\Repositorio\Tests;
+namespace GridPrinciples\Tests;
 
-use GridPrinciples\Repositorio\Tests\Cases\DatabaseTestCase;
-use GridPrinciples\Repositorio\Tests\Mocks\GameRepository;
+use GridPrinciples\Tests\Cases\DatabaseTestCase;
+use GridPrinciples\Tests\Mocks\GameRepository;
 
 class RepositoryQuerying extends DatabaseTestCase
 {
