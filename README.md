@@ -1,5 +1,5 @@
-# Repository
-A basic Eloquent Repository for [Laravel 5.1](http://laravel.com). [![Build Status](https://travis-ci.org/gridprinciples/repository.svg?branch=master)](https://travis-ci.org/gridprinciples/repository)
+# Repository [![Build Status](https://travis-ci.org/gridprinciples/repository.svg?branch=master)](https://travis-ci.org/gridprinciples/repository)
+A basic Eloquent Repository for [Laravel 5.1](http://laravel.com).
 
 ## Installation
 1. Run `composer require gridprinciples/repository` from your project directory.
