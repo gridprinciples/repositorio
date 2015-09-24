@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use GridPrinciples\Exceptions\InvalidModelException;
 use GridPrinciples\Exceptions\InvalidResponseDataException;
 
-abstract class Repository
+abstract class EloquentRepository implements RepositoryInterface
 {
     /**
      * The fully-qualified name of the model.
@@ -67,26 +67,26 @@ abstract class Repository
      * Creates or updates one or many models.
      *
      * @param mixed $data
-     * @param mixed|false $target
+     * @param mixed $targets
      * @throws InvalidResponseDataException
      * @return Collection
      */
-    public static function save($data, $target = false)
+    public static function save($data, $targets = false)
     {
-        if (is_array($target)) {
-            // If the $target is a basic array, put it into a Collection.
-            $target = collect($target);
+        if (is_array($targets)) {
+            // If the $targets is a basic array, put it into a Collection.
+            $targets = collect($targets);
         }
 
         // Are we only saving a single model?  The return should reflect this later.
-        $savingOnlyOne = !$target || class_basename($target) === class_basename(static::newModel());
+        $savingOnlyOne = !$targets || class_basename($targets) === class_basename(static::newModel());
 
-        if (!$target) {
+        if (!$targets) {
             // No target was passed; new up an instance of the default model.
-            $target = static::newModel();
+            $targets = static::newModel();
         }
 
-        $targets = static::consolidateToCollection($target);
+        $targets = static::consolidateToCollection($targets);
 
         if (is_object($data)) {
             if (!method_exists($data, 'toArray')) {
@@ -123,7 +123,7 @@ abstract class Repository
      *
      * @return mixed
      */
-    public static function newModel()
+    protected static function newModel()
     {
         return with(new static::$model)->newInstance();
     }
@@ -133,7 +133,7 @@ abstract class Repository
      *
      * @return mixed
      */
-    public static function newQuery()
+    protected static function newQuery()
     {
         $model = static::newModel();
 
@@ -195,31 +195,5 @@ abstract class Repository
         $traitClassNames = array_map('class_basename', class_uses(static::newModel()));
 
         return in_array($string, $traitClassNames);
-    }
-
-    /**
-     * Unknown static calls get handed an instance of the underlying model.
-     *
-     * @param $method
-     * @param $parameters
-     * @return mixed
-     */
-    public static function __callStatic($method, $parameters)
-    {
-        return forward_static_call_array([static::newModel(), $method], $parameters);
-    }
-
-    /**
-     * Unknown regular calls get handed a new query.
-     *
-     * @param $method
-     * @param $parameters
-     * @return mixed
-     */
-    public function __call($method, $parameters)
-    {
-        $query = $this->newQuery();
-
-        return call_user_func_array([$query, $method], $parameters);
     }
 }

@@ -2,14 +2,15 @@
 
 namespace GridPrinciples\Tests\Mocks;
 
-use GridPrinciples\Repository;
+use GridPrinciples\EloquentRepository;
 
-class GameRepository extends Repository {
+class GameRepository extends EloquentRepository {
     protected static $model = \GridPrinciples\Tests\Mocks\Game::class;
 
     public static function allByCountry()
     {
-        return static::all()
+        return self::newModel()
+            ->all()
             ->groupBy('country');
     }
 }
