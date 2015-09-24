@@ -86,7 +86,7 @@ abstract class EloquentRepository implements RepositoryInterface
             $targets = static::newModel();
         }
 
-        $targets = static::consolidateToCollection($targets);
+        $targets = static::buildCollection($targets);
 
         if (is_object($data)) {
             if (!method_exists($data, 'toArray')) {
@@ -113,7 +113,7 @@ abstract class EloquentRepository implements RepositoryInterface
      */
     public static function delete($target)
     {
-        $targets = static::consolidateToCollection($target);
+        $targets = static::buildCollection($target);
 
         return (bool) static::newModel()->destroy($targets->modelKeys());
     }
@@ -166,7 +166,7 @@ abstract class EloquentRepository implements RepositoryInterface
      * @return Collection
      * @throws InvalidModelException
      */
-    protected static function consolidateToCollection($target)
+    protected static function buildCollection($target)
     {
         if (class_basename($target) == 'Collection') {
             // This is already a Collection, just pass it back.
