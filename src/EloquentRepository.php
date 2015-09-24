@@ -90,7 +90,7 @@ abstract class EloquentRepository implements RepositoryInterface
 
         if (is_object($data)) {
             if (!method_exists($data, 'toArray')) {
-                throw new InvalidResponseDataException;
+                throw new InvalidResponseDataException('The data object attempting to be saved cannot be cast as an array.');
             }
 
             // Simplify the response object to an array of values to save.
@@ -175,7 +175,10 @@ abstract class EloquentRepository implements RepositoryInterface
 
         if (class_basename($target) !== class_basename(static::newModel())) {
             // This wasn't already a Collection, but neither is it the expected class.
-            throw new InvalidModelException;
+            $passed = class_basename($target);
+            $expected = class_basename(static::newModel());
+            $message = "Model of class $passed does not match repository's expected $expected class.";
+            throw new InvalidModelException($message);
         }
 
         $return = new EloquentCollection;
