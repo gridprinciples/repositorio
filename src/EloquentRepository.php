@@ -1,11 +1,11 @@
 <?php
 
-namespace GridPrinciples;
+namespace GridPrinciples\Repository;
 
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
-use GridPrinciples\Exceptions\InvalidModelException;
-use GridPrinciples\Exceptions\InvalidResponseDataException;
+use GridPrinciples\Repository\Exceptions\InvalidModelException;
+use GridPrinciples\Repository\Exceptions\InvalidResponseDataException;
 
 abstract class EloquentRepository implements RepositoryInterface
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace GridPrinciples\Exceptions;
+namespace GridPrinciples\Repository\Exceptions;
 
 use Exception;
 

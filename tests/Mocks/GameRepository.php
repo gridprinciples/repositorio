@@ -1,11 +1,11 @@
 <?php
 
-namespace GridPrinciples\Tests\Mocks;
+namespace GridPrinciples\Repository\Tests\Mocks;
 
-use GridPrinciples\EloquentRepository;
+use GridPrinciples\Repository\EloquentRepository;
 
 class GameRepository extends EloquentRepository {
-    protected static $model = \GridPrinciples\Tests\Mocks\Game::class;
+    protected static $model = \GridPrinciples\Repository\Tests\Mocks\Game::class;
 
     public static function allByCountry()
     {

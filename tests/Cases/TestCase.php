@@ -1,8 +1,7 @@
 <?php
 
-namespace GridPrinciples\Tests\Cases;
+namespace GridPrinciples\Repository\Tests\Cases;
 
-use GridPrinciples\Providers\RepositoryServiceProvider;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase

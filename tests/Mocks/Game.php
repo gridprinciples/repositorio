@@ -1,6 +1,6 @@
 <?php
 
-namespace GridPrinciples\Tests\Mocks;
+namespace GridPrinciples\Repository\Tests\Mocks;
 
 use Illuminate\Database\Eloquent\Model;
 

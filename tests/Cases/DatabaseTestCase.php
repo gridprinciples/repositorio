@@ -1,6 +1,6 @@
 <?php
 
-namespace GridPrinciples\Tests\Cases;
+namespace GridPrinciples\Repository\Tests\Cases;
 
 use Illuminate\Filesystem\ClassFinder;
 use Illuminate\Filesystem\Filesystem;

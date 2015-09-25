@@ -1,6 +1,6 @@
 <?php
 
-namespace GridPrinciples;
+namespace GridPrinciples\Repository;
 
 interface RepositoryInterface
 {

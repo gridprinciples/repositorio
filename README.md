@@ -22,7 +22,7 @@ A basic Eloquent Repository for [Laravel 5.1](http://laravel.com).
 
     use GridPrinciples\Repository;
 
-    class FooRepository extends Repository {
+    class FooRepository extends EloquentRepository {
         protected static $model = \App\Foo::class;
     }
 
