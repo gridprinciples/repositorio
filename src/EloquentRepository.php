@@ -21,7 +21,7 @@ abstract class EloquentRepository implements RepositoryInterface
      *
      * @param $targets
      */
-    public static function get($targets)
+    public function get($targets)
     {
         $singleModelMode = false;
 
@@ -49,7 +49,7 @@ abstract class EloquentRepository implements RepositoryInterface
      * @param int $limit
      * @return
      */
-    public static function index($limit = 15)
+    public function index($limit = 15)
     {
         // Start crafting a new query.
         $query = self::newQuery();
@@ -71,7 +71,7 @@ abstract class EloquentRepository implements RepositoryInterface
      * @throws InvalidResponseDataException
      * @return Collection
      */
-    public static function save($data, $targets = false)
+    public function save($data, $targets = false)
     {
         if (is_array($targets)) {
             // If the $targets is a basic array, put it into a Collection.
@@ -111,7 +111,7 @@ abstract class EloquentRepository implements RepositoryInterface
      * @param mixed $target
      * @return boolean
      */
-    public static function delete($target)
+    public function delete($target)
     {
         $targets = static::buildCollection($target);
 

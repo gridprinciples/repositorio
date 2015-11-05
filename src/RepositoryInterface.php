@@ -9,7 +9,7 @@ interface RepositoryInterface
      *
      * @param $targets
      */
-    public static function get($targets);
+    public function get($targets);
 
     /**
      * Get a list of records.
@@ -17,7 +17,7 @@ interface RepositoryInterface
      * @param int $limit
      * @return
      */
-    public static function index($limit = 15);
+    public function index($limit = 15);
 
     /**
      * Creates or updates one or many models.
@@ -26,7 +26,7 @@ interface RepositoryInterface
      * @param mixed $targets
      * @return Collection
      */
-    public static function save($data, $targets = false);
+    public function save($data, $targets = false);
 
     /**
      * Delete one or many models.
@@ -34,5 +34,5 @@ interface RepositoryInterface
      * @param mixed $targets
      * @return boolean
      */
-    public static function delete($targets);
+    public function delete($targets);
 }
