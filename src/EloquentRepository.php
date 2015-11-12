@@ -168,7 +168,7 @@ abstract class EloquentRepository implements RepositoryInterface
      */
     protected static function buildCollection($target)
     {
-        if (class_basename($target) == 'Collection') {
+        if ($target instanceof Collection) {
             // This is already a Collection, just pass it back.
             return $target;
         }
