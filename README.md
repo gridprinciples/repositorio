@@ -5,7 +5,7 @@ A basic Eloquent Repository for [Laravel 5.1](http://laravel.com).
 1. Run `composer require gridprinciples/repository` from your project directory.
 1. Add the following to the `providers` array in `config/app.php`:  
     ```php
-    GridPrinciples\Friendly\Providers\FriendlyServiceProvider::class,
+    GridPrinciples\Repository\RepositoryServiceProvider::class,
     ```
 
 1. Make a Repositories folder somewhere in your application, such as `app/Repositories`.

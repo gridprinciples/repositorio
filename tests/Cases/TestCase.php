@@ -2,7 +2,7 @@
 
 namespace GridPrinciples\Repository\Tests\Cases;
 
-use GridPrinciples\Repository\RepositoryProvider;
+use GridPrinciples\Repository\RepositoryServiceProvider;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
@@ -22,7 +22,7 @@ abstract class TestCase extends BaseTestCase
             \GridPrinciples\Repository\Tests\Mocks\GameRepository::class,
         ]);
 
-        $app->register(RepositoryProvider::class);
+        $app->register(RepositoryServiceProvider::class);
 
         return $app;
     }

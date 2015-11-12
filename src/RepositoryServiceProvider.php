@@ -4,7 +4,7 @@ namespace GridPrinciples\Repository;
 
 use Illuminate\Support\ServiceProvider;
 
-class RepositoryProvider extends ServiceProvider {
+class RepositoryServiceProvider extends ServiceProvider {
 
 	public function register()
 	{
