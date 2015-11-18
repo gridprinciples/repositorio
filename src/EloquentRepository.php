@@ -123,7 +123,7 @@ abstract class EloquentRepository implements RepositoryInterface
      *
      * @return mixed
      */
-    protected static function newModel()
+    public static function newModel()
     {
         return with(new static::$model)->newInstance();
     }
@@ -133,7 +133,7 @@ abstract class EloquentRepository implements RepositoryInterface
      *
      * @return mixed
      */
-    protected static function newQuery()
+    public static function newQuery()
     {
         $model = static::newModel();
 
